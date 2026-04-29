@@ -3,32 +3,27 @@
 ## Project Overview
 This project explores how AI agents can collaborate to optimize integrated circuit (chip) design. Instead of traditional centralized design workflows, we use distributed multi-agent systems to place macros (components) on a chip to minimize wirelength and congestion.
 
-## AI Agents Chip Design Project Updates
-
 ## Team Members
 - Johir Hossain
 - Linwei Zheng
 
 ## Course
-CSC59866-E: AI Agents for Decision Making in the Real World
-Professor: Saptarashmi Bandyopadhyay
+CSC59866-E: AI Agents for Decision Making in the Real World  
+Professor: Saptarashmi Bandyopadhyay  
 Spring 2026
 
-## Current Status (Week 2)
-- ✅ GitHub repository created
-- ✅ Google Colab environment set up
-- ✅ Basic environment class implemented (10x10 grid)
-- ✅ Random agent baseline working
-- ⏳ Training agent (in progress)
-- ⏳ Multi-agent extension (planned)
+---
 
-## How to Run the Prototype
+## Project Status
 
-### Option 1: Google Colab (Recommended)
-1. Open the notebook in `notebooks/prototype_v1.ipynb`
-2. Run all cells sequentially
-3. Observe the random agent placing macros on a grid
+| Week | Status |
+|------|--------|
+| Week 1 | Research question defined, literature review completed |
+| Week 2 | Basic environment + random agent implemented ✅ |
+| Week 3 | Wirelength reward + Q-learning agent implemented ✅ |
+| Week 4 | Deep Q-Network (in progress) |
+| Week 5 | Multi-agent extension (planned) |
 
-### Option 2: Local Python
-```bash
-python src/simple_env.py
+---
+
+## Code Structure
