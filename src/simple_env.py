@@ -16,7 +16,7 @@ class SimpleChipEnv:
     
     State: 10x10 grid with 0=empty, 1=occupied
     Action: (x, y) coordinates to place next macro
-    Reward: Negative number of macros placed (simplified wirelength)
+    Reward: Negative wirelength (shorter wires = higher reward)
     """
     
     def __init__(self, grid_size=10, num_macros=5):
@@ -31,6 +31,23 @@ class SimpleChipEnv:
         self.step_count = 0
         return self.grid
     
+    def calculate_wirelength(self, positions):
+        """
+        Calculate total Manhattan distance between consecutive macros.
+        Manhattan distance = |x1 - x2| + |y1 - y2|
+        """
+        if len(positions) < 2:
+            return 0
+        
+        total = 0
+        for i in range(len(positions) - 1):
+            x1, y1 = positions[i]
+            x2, y2 = positions[i + 1]
+            distance = abs(x1 - x2) + abs(y1 - y2)
+            total += distance
+        
+        return total
+    
     def step(self, action):
         """
         Take an action (place macro at position) and return next state, reward, done.
@@ -40,7 +57,7 @@ class SimpleChipEnv:
         
         Returns:
             next_state: updated grid
-            reward: negative step count (penalty for each placement)
+            reward: negative wirelength (shorter = better)
             done: True if all macros placed
         """
         x, y = action
@@ -51,8 +68,9 @@ class SimpleChipEnv:
             self.macros_placed.append((x, y))
             self.step_count += 1
             
-            # Reward: negative step count (fewer steps = better placement)
-            reward = -self.step_count
+            # Calculate wirelength reward
+            wirelength = self.calculate_wirelength(self.macros_placed)
+            reward = -wirelength  # Shorter wirelength = higher reward (less negative)
             
             # Check if done (all macros placed)
             done = len(self.macros_placed) >= self.num_macros
@@ -67,7 +85,10 @@ class SimpleChipEnv:
         print("Current Grid:")
         for row in self.grid:
             print(' '.join(['X' if cell == 1 else '.' for cell in row]))
-        print(f"Macros placed: {len(self.macros_placed)}/{self.num_macros}\n")
+        print(f"Macros placed: {len(self.macros_placed)}/{self.num_macros}")
+        if len(self.macros_placed) >= 2:
+            print(f"Wirelength: {self.calculate_wirelength(self.macros_placed)}")
+        print()
 
 
 class RandomAgent:
@@ -86,7 +107,7 @@ class RandomAgent:
 # Demo code
 if __name__ == "__main__":
     print("=" * 50)
-    print("AI Chip Design Agent - Prototype Demo")
+    print("AI Chip Design Agent - Prototype Demo with Wirelength Reward")
     print("=" * 50)
     
     # Create environment
@@ -117,4 +138,5 @@ if __name__ == "__main__":
     print(f"Total steps: {step}")
     print(f"Total reward: {total_reward}")
     print(f"Positions placed: {env.macros_placed}")
+    print(f"Final wirelength: {env.calculate_wirelength(env.macros_placed)}")
     print("=" * 50)
