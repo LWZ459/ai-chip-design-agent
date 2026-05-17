@@ -1,42 +1,31 @@
 # AI Agents for Distributed Chip Design
 
-## Project Overview
-This project explores how AI agents can collaborate to optimize integrated circuit (chip) design. Instead of traditional centralized design workflows, we use distributed multi-agent systems to place macros (components) on a chip to minimize wirelength and congestion.
-
-## Team Members
+## Team
 - Johir Hossain
 - Linwei Zheng
 
 ## Course
-CSC59866-E: AI Agents for Decision Making in the Real World  
-Professor: Saptarashmi Bandyopadhyay  
+CSC59866-E: AI Agents for Decision Making in the Real World
+Professor: Dr. Saptarashmi Bandyopadhyay
 Spring 2026
 
----
+## Project Overview
+AI agents that optimize chip macro placement to minimize wirelength.
 
-## Project Status
+## Final Results
 
-| Week | Status |
-|------|--------|
-| Week 1 | Research question defined, literature review completed |
-| Week 2 | Basic environment + random agent implemented ✅ |
-| Week 3 | Wirelength reward + Q-learning agent implemented ✅ |
-| Week 4 | Deep Q-Network (in progress) |
-| Week 5 | Multi-agent extension (planned) |
+| Agent | Best Reward | Average Reward | Improvement vs Random |
+|-------|-------------|----------------|----------------------|
+| Random Agent | N/A | -35 | Baseline |
+| Q-Learning (500 episodes) | -9 | -21.34 | 39% better |
+| DQN (200 episodes) | -6 | -7.74 | 78% better |
 
-### Week 4 Results (DQN Agent)
-| Metric | Value |
-|--------|-------|
-| Grid size | 6x6 |
-| Macros placed | 4 |
-| Training episodes | 200 |
-| Best reward | -14 |
-| Average reward (last 50 episodes) | -16 |
-| Improvement over random | ~54% |
+## How to Run
 
-### Comparison Table
-| Agent | Average Reward | Improvement vs Random |
-|-------|---------------|----------------------|
-| Random Agent | -35 | Baseline |
-| Q-Learning (500 episodes) | -18 | 48% better |
-| DQN (200 episodes) | -16 | 54% better |
+### Option 1: Google Colab
+1. Open `notebooks/prototype_v1.ipynb` for Week 2-3
+2. Open `notebooks/DQN (1).ipynb` for Week 4 DQN
+
+### Option 2: Local Python
+```bash
+python src/simple_env.py
